@@ -1,0 +1,11 @@
+.header  { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.title   { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; }
+.title em { font-style: italic; color: var(--gold); }
+.permBox  { margin-top: 24px; background: var(--dark2); border: 1px solid var(--border); border-radius: var(--r2); padding: 24px; }
+.permTitle { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.permGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.permCard { background: var(--dark); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; }
+.permRole { font-weight: 500; margin-bottom: 10px; font-size: 14px; }
+.permList { list-style: none; padding: 0; }
+.permList li { font-size: 13px; color: var(--muted); line-height: 2; padding-left: 14px; position: relative; }
+.permList li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); opacity: .6; }

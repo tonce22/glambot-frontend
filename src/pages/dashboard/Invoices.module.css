@@ -1,0 +1,10 @@
+.header  { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.title   { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; }
+.title em { font-style: italic; color: var(--gold); }
+.filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.filterBtn { padding: 7px 16px; border-radius: var(--r); border: 1px solid var(--border); background: none; font-size: 12px; color: var(--muted); transition: all .15s; letter-spacing: .05em; }
+.filterBtn:hover { color: rgba(255,255,255,.7); border-color: rgba(255,255,255,.2); }
+.active { background: rgba(201,169,110,.12) !important; border-color: var(--gold) !important; color: var(--gold) !important; }
+.searchBox { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: var(--r); padding: 7px 13px; }
+.searchBox input { background: none; border: none; color: var(--white); font-size: 13px; outline: none; width: 220px; }
+.searchBox input::placeholder { color: rgba(255,255,255,.22); }

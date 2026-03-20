@@ -1,0 +1,27 @@
+.header  { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.title   { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; }
+.title em { font-style: italic; color: var(--gold); }
+.sectionTitle { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+.langPicker { display: flex; gap: 8px; margin-bottom: 4px; }
+.langPill { padding: 8px 18px; border-radius: 2px; border: 1px solid var(--border); background: none; font-size: 12px; letter-spacing: .08em; color: var(--muted); transition: all .15s; }
+.langPill:hover { border-color: rgba(255,255,255,.25); color: rgba(255,255,255,.7); }
+.langActive { background: rgba(201,169,110,.15); border-color: var(--gold) !important; color: var(--gold) !important; }
+.liTable { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 8px; }
+.liTable th { padding: 10px 8px; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 400; border-bottom: 1px solid var(--border); background: var(--dark); }
+.liTable td { padding: 6px 4px; border-bottom: none; }
+.liTable td input { border: 1px solid transparent; border-radius: var(--r); padding: 8px 10px; font-size: 13px; color: var(--white); background: rgba(255,255,255,.03); outline: none; width: 100%; transition: border .15s; }
+.liTable td input:focus { border-color: var(--gold); background: rgba(201,169,110,.04); }
+.liTotal { display: block; padding: 8px 10px; color: var(--gold); font-size: 13px; text-align: right; }
+.rmBtn { background: none; border: none; color: rgba(255,255,255,.15); font-size: 20px; padding: 0 6px; transition: color .15s; line-height: 1; }
+.rmBtn:hover { color: #E87070; }
+.addItemBtn { width: 100%; margin-top: 6px; padding: 10px; background: none; border: 1px dashed rgba(201,169,110,.22); border-radius: var(--r); color: var(--muted); font-size: 13px; transition: all .15s; }
+.addItemBtn:hover { border-color: var(--gold); color: var(--gold); }
+.totals { display: flex; justify-content: flex-end; margin-top: 18px; }
+.totalsInner { min-width: 270px; }
+.totRow { display: flex; justify-content: space-between; padding: 9px 0; font-size: 14px; color: rgba(255,255,255,.55); border-bottom: 1px solid rgba(201,169,110,.07); }
+.totGrand { border-bottom: none !important; padding-top: 14px !important; color: var(--white) !important; }
+.totAmount { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--gold); }
+.actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--border); }
