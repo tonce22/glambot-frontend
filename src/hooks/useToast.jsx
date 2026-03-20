@@ -1,21 +1,28 @@
-import { useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback } from 'react'
 
-export function useToast() {
+const ToastCtx = createContext(null)
+
+export function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([])
 
-  const toast = useCallback((msg, type = '') => {
+  const show = useCallback((msg, type = '') => {
     const id = Date.now()
-    setToasts(prev => [...prev, { id, msg, type }])
-    setTimeout(() => setToasts(prev => prev.filter(t => t.id !== id)), 3200)
+    setToasts(t => [...t, { id, msg, type }])
+    setTimeout(() => setToasts(t => t.filter(x => x.id !== id)), 3000)
   }, [])
 
-  const ToastContainer = () => (
-    <div className="toast-container">
-      {toasts.map(t => (
-        <div key={t.id} className={`toast ${t.type}`}>{t.msg}</div>
-      ))}
-    </div>
+  return (
+    <ToastCtx.Provider value={show}>
+      {children}
+      <div style={{ position:'fixed', bottom:28, right:28, zIndex:9999, display:'flex', flexDirection:'column', gap:8, pointerEvents:'none' }}>
+        {toasts.map(t => (
+          <div key={t.id} className={`toast${t.type ? ` toast-${t.type}` : ''}`}>{t.msg}</div>
+        ))}
+      </div>
+    </ToastCtx.Provider>
   )
+}
 
-  return { toast, ToastContainer }
+export function useToast() {
+  return useContext(ToastCtx)
 }
