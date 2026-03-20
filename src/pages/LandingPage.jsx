@@ -142,7 +142,7 @@ export default function LandingPage() {
           </button>
           <div className={styles.contactRow}>
             <div><div className={styles.ciLbl}>{t.contact.phone}</div><div className={styles.ciVal}>+995 557 07 20 00</div></div>
-            <div><div className={styles.ciLbl}>{t.contact.owner}</div><div className={styles.ciVal}>Tezo Tabidze</div></div>
+            <div><div className={styles.ciLbl}>{t.contact.owner}</div><div className={styles.ciVal}>Rezi Tabidze</div></div>
             <div><div className={styles.ciLbl}>{t.contact.location}</div><div className={styles.ciVal}>{t.contact.loc}</div></div>
           </div>
         </div>
