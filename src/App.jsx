@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { LangProvider } from './context/LangContext'
-import { ToastProvider } from './hooks/useToast'
+import { ToastProvider } from './hooks/useToast.jsx'
 import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/LoginPage'
 import DashboardLayout from './pages/dashboard/DashboardLayout'
