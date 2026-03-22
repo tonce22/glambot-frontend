@@ -32,7 +32,6 @@ export default function LandingPage() {
   const statEvents = content.about_stat_events || '120+'
   const statSlowmo = content.about_stat_slowmo || '240fps'
   const statRes = content.about_stat_res || '4K'
-  const videoId = content.hero_video_id || '9PtZSgiDSso'
   const logoUrl = content.logo_url || ''
   const phone = content.contact_phone || '+995 557 07 20 00'
   const email = content.contact_email || ''
@@ -82,13 +81,6 @@ export default function LandingPage() {
 
       {/* ABOUT */}
       <section className={`${styles.sec} ${styles.secBorder}`} id="sec-about">
-        <div style={{ width:'100%', aspectRatio:'16/9', borderRadius:'8px', overflow:'hidden', marginBottom:'60px', background:'#000' }}>
-          <iframe width="100%" height="100%"
-            src={`https://www.youtube.com/embed/${videoId}`}
-            title="Glambot Georgia" frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen style={{ display:'block', width:'100%', height:'100%' }}/>
-        </div>
         <div className={styles.aboutGrid}>
           <div className={styles.aboutFrame}>
             <div className={styles.aboutFrameIcon}>🎬</div>
@@ -113,7 +105,10 @@ export default function LandingPage() {
         <div className={styles.secTag}>{t.services.tag}</div>
         <h2 className={styles.secH}>{t.services.h} <em>{t.services.hem}</em></h2>
         <div className={styles.srvGrid}>
-          {[1,2,3].map((n,i) => { const s=srv(n); const icons=['💍','🎉','🎞️']; const nums=['01','02','03']
+          {[1,2,3].map((n,i) => {
+            const s = srv(n)
+            const icons = ['💍','🎉','🎞️']
+            const nums = ['01','02','03']
             return (
               <div key={n} className={styles.srvCard}>
                 <div className={styles.srvNum}>{nums[i]}</div>
@@ -121,11 +116,11 @@ export default function LandingPage() {
                 <div className={styles.srvName}>{s.name}</div>
                 <div className={styles.srvDesc}>{s.desc}</div>
                 <button
-  className={styles.srvPriceBtn}
-  onClick={() => scrollTo('sec-contact')}
->
-  {t.services.price} →
-</button>
+                  className={styles.srvPriceBtn}
+                  onClick={() => scrollTo('sec-contact')}
+                >
+                  {s.price}
+                </button>
               </div>
             )
           })}
@@ -154,7 +149,10 @@ export default function LandingPage() {
           <div className={styles.galGrid}>
             {[{ico:'🎬',span2:true},{ico:'💃'},{ico:'🌸'},{ico:'✨'},{ico:'🎊'}].map((g,i) => (
               <div key={i} className={`${styles.galItem} ${g.span2 ? styles.galSpan : ''}`}>
-                <div className={styles.galInner}><div className={styles.galIco}>{g.ico}</div><div className={styles.galLbl}>{t.gallery.items[i]}</div></div>
+                <div className={styles.galInner}>
+                  <div className={styles.galIco}>{g.ico}</div>
+                  <div className={styles.galLbl}>{t.gallery.items[i]}</div>
+                </div>
                 <div className={styles.galHover} />
               </div>
             ))}
@@ -171,7 +169,7 @@ export default function LandingPage() {
           <button className={styles.btnPrimary} onClick={() => window.location.href=`tel:${phone.replace(/\s/g,'')}`}>{phone}</button>
           <div className={styles.contactRow}>
             <div><div className={styles.ciLbl}>{t.contact.phone}</div><div className={styles.ciVal}>{phone}</div></div>
-            <div><div className={styles.ciLbl}>{t.contact.owner}</div><div className={styles.ciVal}>Tezo Tabidze</div></div>
+            <div><div className={styles.ciLbl}>{t.contact.owner}</div><div className={styles.ciVal}>Rezo Tabidze</div></div>
             <div><div className={styles.ciLbl}>{t.contact.location}</div><div className={styles.ciVal}>{address || t.contact.loc}</div></div>
             {email && <div><div className={styles.ciLbl}>Email</div><div className={styles.ciVal}>{email}</div></div>}
           </div>
