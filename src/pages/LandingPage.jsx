@@ -120,7 +120,12 @@ export default function LandingPage() {
                 <div className={styles.srvIco}>{icons[i]}</div>
                 <div className={styles.srvName}>{s.name}</div>
                 <div className={styles.srvDesc}>{s.desc}</div>
-                <div className={styles.srvPrice}>{s.price}</div>
+                <button
+  className={styles.srvPriceBtn}
+  onClick={() => scrollTo('sec-contact')}
+>
+  {t.services.price} →
+</button>
               </div>
             )
           })}
