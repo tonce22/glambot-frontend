@@ -5,13 +5,9 @@ import styles from './DashboardLayout.module.css'
 export default function DashboardLayout() {
   const { user, logout, isAdmin } = useAuth()
   const navigate = useNavigate()
-
   const initials = user?.name?.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'U'
 
-  const handleLogout = () => {
-    logout()
-    navigate('/')
-  }
+  const handleLogout = () => { logout(); navigate('/') }
 
   return (
     <div className={styles.layout}>
@@ -26,6 +22,11 @@ export default function DashboardLayout() {
             <NavLink to="/dashboard/invoices" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
               Invoices
             </NavLink>
+            {isAdmin && (
+              <NavLink to="/dashboard/content" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
+                Content
+              </NavLink>
+            )}
             {isAdmin && (
               <NavLink to="/dashboard/users" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
                 Users
@@ -45,7 +46,6 @@ export default function DashboardLayout() {
           <button className={styles.logoutBtn} onClick={handleLogout}>Sign out</button>
         </div>
       </header>
-
       <main className={styles.main}>
         <Outlet />
       </main>
