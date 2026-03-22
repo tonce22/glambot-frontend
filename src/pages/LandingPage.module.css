@@ -243,3 +243,29 @@
 
   .footer { padding: 24px 40px; }
 }
+
+/* ── LOGO ── */
+.logoWrap { display:flex; align-items:center; }
+.logoText { font-family:'Cormorant Garamond',serif; font-size:21px; letter-spacing:.1em; color:var(--gold); }
+.logoText span { color:var(--white); font-style:italic; }
+.logoImg { max-height:44px; max-width:200px; object-fit:contain; }
+
+/* ── DYNAMIC GALLERY ── */
+.galDynGrid {
+  display:grid; grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:240px 240px; gap:2px; margin-top:48px;
+}
+.galDynItem { position:relative; overflow:hidden; background:var(--dark2); }
+.galDynSpan { grid-row:span 2; }
+.galCaption {
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(transparent,rgba(0,0,0,.7));
+  padding:10px 14px; font-size:13px; color:rgba(255,255,255,.8);
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+}
+
+@media (max-width:768px) {
+  .galDynGrid { grid-template-columns:1fr; grid-template-rows:auto; }
+  .galDynItem { aspect-ratio:16/9; }
+  .galDynSpan { grid-row:span 1; }
+}
