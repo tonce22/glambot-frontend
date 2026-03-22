@@ -269,3 +269,22 @@
   .galDynItem { aspect-ratio:16/9; }
   .galDynSpan { grid-row:span 1; }
 }
+.srvPriceBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: none;
+  border: 1px solid var(--border2);
+  border-radius: 2px;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  display: inline-block;
+}
+.srvPriceBtn:hover {
+  background: var(--gold);
+  color: var(--black);
+}
