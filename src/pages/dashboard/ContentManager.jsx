@@ -14,6 +14,7 @@ export default function ContentManager() {
   const [tab, setTab] = useState('about')
   const logoRef = useRef()
   const galleryRef = useRef()
+  const aboutMediaRef = useRef()
 
   useEffect(() => {
     Promise.all([api.get('/content'), api.get('/gallery')])
@@ -136,7 +137,80 @@ export default function ContentManager() {
       {/* ── ABOUT TAB ── */}
       {tab === 'about' && (
         <div className={styles.section}>
-          <div className={styles.sectionTitle}>About Section</div>
+
+          {/* ABOUT MEDIA */}
+          <div className={styles.sectionTitle}>About Section — Left Side Media</div>
+          <div className={styles.card} style={{ marginBottom:20 }}>
+            <div className={styles.cardLabel}>Upload Video or Image (shown on the left side of About section)</div>
+
+            {/* Preview */}
+            <div className={styles.aboutMediaPreview}>
+              {content.about_youtube_id ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${content.about_youtube_id}`}
+                  title="About video" frameBorder="0" allowFullScreen
+                  style={{ width:'100%', height:'100%', minHeight:200 }}
+                />
+              ) : content.about_media_url && content.about_media_type === 'video' ? (
+                <video src={content.about_media_url} controls style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+              ) : content.about_media_url && content.about_media_type === 'image' ? (
+                <img src={content.about_media_url} alt="About" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+              ) : (
+                <div style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', height:'100%', color:'var(--muted)' }}>
+                  <div style={{ fontSize:48, opacity:.3 }}>🎬</div>
+                  <div style={{ fontSize:13, marginTop:8 }}>No media uploaded yet</div>
+                </div>
+              )}
+            </div>
+
+            {/* Upload options */}
+            <div className={styles.galUploadRow} style={{ marginTop:16 }}>
+              <div className={styles.galUploadBox}>
+                <input type="file" ref={aboutMediaRef} accept="image/*,video/*" style={{ display:'none' }}
+                  onChange={async e => {
+                    const f = e.target.files[0]; if(!f) return
+                    const isVideo = f.type.startsWith('video/')
+                    await uploadFile(f, url => {
+                      set('about_media_url', url)
+                      set('about_media_type', isVideo ? 'video' : 'image')
+                      set('about_youtube_id', '')
+                    })
+                    e.target.value = ''
+                  }}/>
+                <button className={styles.uploadBtn} onClick={() => aboutMediaRef.current.click()}>
+                  📁 Upload Image or Video
+                </button>
+              </div>
+              <div className={styles.galDivider}>or</div>
+              <div className={styles.galUrlBox}>
+                <input type="text" placeholder="Paste YouTube video ID (e.g. 9PtZSgiDSso)"
+                  id="about-yt-input"
+                  defaultValue={content.about_youtube_id || ''}
+                  style={{ background:'rgba(255,255,255,.04)', border:'1px solid var(--border)', borderRadius:'var(--r)', padding:'10px 14px', color:'var(--white)', fontSize:13, width:'100%', outline:'none' }}/>
+                <button className={styles.uploadBtn} onClick={() => {
+                  const val = document.getElementById('about-yt-input').value.trim()
+                  if(!val) return
+                  set('about_youtube_id', val)
+                  set('about_media_url', '')
+                  set('about_media_type', '')
+                  toast('YouTube video set! Click Save All Changes.', 'ok')
+                }}>+ Set YouTube Video</button>
+              </div>
+            </div>
+
+            {/* Remove button */}
+            {(content.about_media_url || content.about_youtube_id) && (
+              <button className={styles.removeBtn} style={{ marginTop:12 }} onClick={() => {
+                set('about_media_url', '')
+                set('about_media_type', '')
+                set('about_youtube_id', '')
+                toast('Media removed. Click Save All Changes.', 'ok')
+              }}>✕ Remove Media (show emoji placeholder)</button>
+            )}
+          </div>
+
+          {/* ABOUT TEXT */}
+          <div className={styles.sectionTitle}>About Section — Text</div>
           <div className={styles.card}>
             <div className={styles.field}>
               <label>Paragraph 1</label>
@@ -161,11 +235,6 @@ export default function ContentManager() {
                 <input value={content.about_stat_res||''} onChange={e => set('about_stat_res', e.target.value)}/>
               </div>
             </div>
-            <div className={styles.field} style={{ marginTop:16 }}>
-              <label>Hero Video (YouTube Video ID)</label>
-              <input value={content.hero_video_id||''} onChange={e => set('hero_video_id', e.target.value)} placeholder="e.g. 9PtZSgiDSso"/>
-              <div className={styles.hint}>The part after ?v= in the YouTube URL. Current: https://youtube.com/watch?v={content.hero_video_id||'…'}</div>
-            </div>
           </div>
         </div>
       )}
@@ -186,7 +255,7 @@ export default function ContentManager() {
                 <textarea value={content[`srv${n}_desc`]||''} onChange={e => set(`srv${n}_desc`, e.target.value)} rows={3}/>
               </div>
               <div className={styles.field}>
-                <label>Price / CTA Text</label>
+                <label>Price / Button Text</label>
                 <input value={content[`srv${n}_price`]||''} onChange={e => set(`srv${n}_price`, e.target.value)} placeholder="e.g. From ₾500 →"/>
               </div>
             </div>
@@ -198,8 +267,6 @@ export default function ContentManager() {
       {tab === 'gallery' && (
         <div className={styles.section}>
           <div className={styles.sectionTitle}>Gallery</div>
-
-          {/* Upload area */}
           <div className={styles.card} style={{ marginBottom:20 }}>
             <div className={styles.cardLabel}>Add to Gallery</div>
             <div className={styles.galUploadRow}>
@@ -232,10 +299,8 @@ export default function ContentManager() {
               </div>
             </div>
           </div>
-
-          {/* Gallery grid */}
           {gallery.length === 0 ? (
-            <div style={{ textAlign:'center', padding:'48px', color:'var(--muted)' }}>No gallery items yet. Upload images or add YouTube videos above.</div>
+            <div style={{ textAlign:'center', padding:'48px', color:'var(--muted)' }}>No gallery items yet.</div>
           ) : (
             <div className={styles.galGrid}>
               {gallery.map(item => (
@@ -279,7 +344,6 @@ export default function ContentManager() {
         </div>
       )}
 
-      {/* SAVE BUTTON BOTTOM */}
       <div className={styles.saveRow}>
         <button className={styles.saveBtn} onClick={saveAll} disabled={saving}>
           {saving ? 'Saving…' : '💾 Save All Changes'}
