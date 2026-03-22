@@ -9,6 +9,7 @@ import Overview from './pages/dashboard/Overview'
 import Invoices from './pages/dashboard/Invoices'
 import InvoiceForm from './pages/dashboard/InvoiceForm'
 import Users from './pages/dashboard/Users'
+import ContentManager from './pages/dashboard/ContentManager'
 import ProtectedRoute from './components/ProtectedRoute'
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
               <Route path="invoices" element={<Invoices />} />
               <Route path="invoices/new" element={<InvoiceForm />} />
               <Route path="invoices/:id/edit" element={<InvoiceForm />} />
+              <Route path="content" element={<ContentManager />} />
               <Route path="users" element={<Users />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
