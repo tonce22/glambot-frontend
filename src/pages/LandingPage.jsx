@@ -36,12 +36,41 @@ export default function LandingPage() {
   const phone = content.contact_phone || '+995 557 07 20 00'
   const email = content.contact_email || ''
   const address = content.contact_address || ''
+  const aboutMediaUrl = content.about_media_url || ''
+  const aboutMediaType = content.about_media_type || ''
+  const aboutYoutubeId = content.about_youtube_id || ''
 
   const srv = (n) => ({
     name: content[`srv${n}_name`] || t.services[`s${n}`]?.name || '',
     desc: content[`srv${n}_desc`] || t.services[`s${n}`]?.desc || '',
     price: content[`srv${n}_price`] || t.services.price,
   })
+
+  const renderAboutMedia = () => {
+    if (aboutYoutubeId) {
+      return (
+        <iframe
+          width="100%" height="100%"
+          src={`https://www.youtube.com/embed/${aboutYoutubeId}`}
+          title="Glambot Georgia" frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen style={{ display:'block', width:'100%', height:'100%' }}
+        />
+      )
+    }
+    if (aboutMediaUrl && aboutMediaType === 'video') {
+      return <video src={aboutMediaUrl} style={{ width:'100%', height:'100%', objectFit:'cover' }} controls/>
+    }
+    if (aboutMediaUrl && aboutMediaType === 'image') {
+      return <img src={aboutMediaUrl} alt="About Glambot Georgia" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+    }
+    return (
+      <>
+        <div className={styles.aboutFrameIcon}>🎬</div>
+        <div className={styles.aboutFrameTxt}>{t.about.frame}</div>
+      </>
+    )
+  }
 
   return (
     <div className={styles.page} lang={lang === 'ka' ? 'ka' : undefined}>
@@ -76,15 +105,14 @@ export default function LandingPage() {
             <button className={styles.btnSecondary} onClick={() => scrollTo('sec-contact')}>{t.hero.btn2}</button>
           </div>
         </div>
-        <div className={styles.heroFloat}>Glambot ✦<br />Georgia ✦<br />Est.2026</div>
+        <div className={styles.heroFloat}>Glambot ✦<br />Georgia</div>
       </section>
 
       {/* ABOUT */}
       <section className={`${styles.sec} ${styles.secBorder}`} id="sec-about">
         <div className={styles.aboutGrid}>
-          <div className={styles.aboutFrame}>
-            <div className={styles.aboutFrameIcon}>🎬</div>
-            <div className={styles.aboutFrameTxt}>{t.about.frame}</div>
+          <div className={styles.aboutFrame} style={{ overflow:'hidden', padding: (aboutMediaUrl || aboutYoutubeId) ? 0 : undefined }}>
+            {renderAboutMedia()}
           </div>
           <div>
             <div className={styles.secTag}>{t.about.tag}</div>
@@ -115,10 +143,7 @@ export default function LandingPage() {
                 <div className={styles.srvIco}>{icons[i]}</div>
                 <div className={styles.srvName}>{s.name}</div>
                 <div className={styles.srvDesc}>{s.desc}</div>
-                <button
-                  className={styles.srvPriceBtn}
-                  onClick={() => scrollTo('sec-contact')}
-                >
+                <button className={styles.srvPriceBtn} onClick={() => scrollTo('sec-contact')}>
                   {s.price}
                 </button>
               </div>
