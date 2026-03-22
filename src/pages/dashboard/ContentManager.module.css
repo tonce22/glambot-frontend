@@ -61,3 +61,16 @@
   .galDivider { display:none; }
   .header { flex-direction:column; gap:16px; }
 }
+
+/* ABOUT MEDIA PREVIEW */
+.aboutMediaPreview {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: rgba(255,255,255,.03);
+  border: 1px dashed var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
