@@ -76,7 +76,7 @@ export default function LandingPage() {
             <button className={styles.btnSecondary} onClick={() => scrollTo('sec-contact')}>{t.hero.btn2}</button>
           </div>
         </div>
-        <div className={styles.heroFloat}>Glambot ✦<br />Georgia ✦<br />Est.2024</div>
+        <div className={styles.heroFloat}>Glambot ✦<br />Georgia ✦<br />Est.2026</div>
       </section>
 
       {/* ABOUT */}
