@@ -1,0 +1,13 @@
+.header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 32px; }
+.title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; }
+.title em { font-style: italic; color: var(--gold); }
+.date  { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.loading { color: var(--muted); padding: 48px; text-align: center; }
+.statsGrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 32px; }
+.statCard  { background: var(--dark2); border: 1px solid var(--border); border-radius: var(--r2); padding: 22px 24px; }
+.statLabel { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.statValue { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; }
+.gold  { color: var(--gold); }
+.green { color: #6FCF97; }
+.amber { color: #F2C94C; }
+.sectionLabel { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }

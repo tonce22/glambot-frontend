@@ -1,0 +1,30 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 3px;
+}
+
+.btn {
+  padding: 5px 11px;
+  border-radius: 2px;
+  border: none;
+  background: none;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.btn:hover:not(.active) { color: var(--gold); }
+
+.active {
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 600;
+}
