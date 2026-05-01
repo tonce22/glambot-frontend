@@ -182,7 +182,7 @@ export const T = {
 }
 
 export function LangProvider({ children }) {
-  const [lang, setLang] = useState('en')
+  const [lang, setLang] = useState('ka')
   return (
     <LangContext.Provider value={{ lang, setLang, t: T[lang] }}>
       {children}

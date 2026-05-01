@@ -27,6 +27,11 @@ export default function DashboardLayout() {
               Invoices
             </NavLink>
             {isAdmin && (
+              <NavLink to="/dashboard/expenses" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
+                Expenses
+              </NavLink>
+            )}
+            {isAdmin && (
               <NavLink to="/dashboard/users" className={({ isActive }) => isActive ? `${styles.navItem} ${styles.active}` : styles.navItem}>
                 Users
               </NavLink>
