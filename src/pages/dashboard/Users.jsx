@@ -7,7 +7,7 @@ import styles from './Users.module.css'
 
 const ROLE_BADGE = { admin: 'badge-admin', manager: 'badge-manager', viewer: 'badge-viewer' }
 
-const emptyUser = { name: '', username: '', password: '', role: 'manager' }
+const emptyUser = { name: '', username: '', email: '', password: '', role: 'manager' }
 
 export default function Users() {
   const { isAdmin, user: me } = useAuth()
@@ -24,7 +24,7 @@ export default function Users() {
   useEffect(() => { if (isAdmin) load() }, [isAdmin])
 
   const openAdd = () => { setEditing(null); setForm(emptyUser); setModal(true) }
-  const openEdit = (u) => { setEditing(u.id); setForm({ name: u.name, username: u.username, password: '', role: u.role }); setModal(true) }
+  const openEdit = (u) => { setEditing(u.id); setForm({ name: u.name, username: u.username, email: u.email || '', password: '', role: u.role }); setModal(true) }
 
   const saveUser = async () => {
     if (!form.name || !form.username) { toast('Name and username are required', 'err'); return }
@@ -75,7 +75,7 @@ export default function Users() {
       <div className="tbl-wrap">
         <table>
           <thead>
-            <tr><th>Name</th><th>Username</th><th>Role</th><th>Created</th><th>Actions</th></tr>
+            <tr><th>Name</th><th>Username</th><th>Email</th><th>Role</th><th>Created</th><th>Actions</th></tr>
           </thead>
           <tbody>
             {loading ? (
@@ -84,6 +84,7 @@ export default function Users() {
               <tr key={u.id}>
                 <td style={{ fontWeight: 500 }}>{u.name} {u.id === me?.id && <span style={{ fontSize: 11, color: 'var(--gold)', marginLeft: 6 }}>(you)</span>}</td>
                 <td style={{ color: 'var(--muted)', fontSize: 12, letterSpacing: '.04em' }}>{u.username}</td>
+                <td style={{ color: 'var(--muted)', fontSize: 12 }}>{u.email || '—'}</td>
                 <td><span className={`badge ${ROLE_BADGE[u.role]}`}>{u.role}</span></td>
                 <td style={{ color: 'var(--muted)' }}>{u.created}</td>
                 <td>
@@ -131,6 +132,9 @@ export default function Users() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
                 <div className="field"><label>Full Name</label><input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Full name" /></div>
                 <div className="field"><label>Username</label><input value={form.username} onChange={e => setForm(f => ({ ...f, username: e.target.value }))} placeholder="login username" /></div>
+              </div>
+              <div style={{ marginBottom: 16 }}>
+                <div className="field"><label>Email</label><input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="email@example.com" /></div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 <div className="field"><label>Password {editing && <span style={{ color: 'var(--muted)', textTransform: 'none', letterSpacing: 0 }}>(leave blank to keep)</span>}</label><input type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} placeholder={editing ? 'New password…' : 'Password'} /></div>

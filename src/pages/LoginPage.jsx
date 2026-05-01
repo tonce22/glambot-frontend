@@ -62,9 +62,6 @@ export default function LoginPage() {
         <div className={styles.back}>
           <a onClick={() => navigate('/')}>← Back to website</a>
         </div>
-        <div className={styles.hint}>
-          Admin: <strong>admin</strong> / <strong>glambot2024</strong>
-        </div>
       </div>
     </div>
   )
