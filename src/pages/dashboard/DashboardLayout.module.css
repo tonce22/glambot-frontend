@@ -3,30 +3,52 @@
 .topbar {
   background: var(--dark2); border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 32px; height: 60px; flex-shrink: 0;
+  padding: 0 16px; height: 56px; flex-shrink: 0;
   position: sticky; top: 0; z-index: 50;
+  gap: 8px;
 }
-.left  { display: flex; align-items: center; gap: 20px; }
-.right { display: flex; align-items: center; gap: 14px; }
-.logo  { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--gold); letter-spacing: .08em; }
-.sep   { width: 1px; height: 24px; background: var(--border); }
+.left  { display: flex; align-items: center; gap: 8px; overflow: hidden; min-width: 0; }
+.right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.logo  { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--gold); letter-spacing: .08em; white-space: nowrap; }
+.sep   { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; display: none; }
 
-.nav { display: flex; gap: 2px; }
+.nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
 .navItem {
-  padding: 7px 16px; border-radius: var(--r); border: none; background: none;
-  font-size: 13px; color: rgba(255,255,255,.45); transition: all .15s; letter-spacing: .03em; text-decoration: none;
+  padding: 6px 10px; border-radius: var(--r); border: none; background: none;
+  font-size: 12px; color: rgba(255,255,255,.45); transition: all .15s;
+  letter-spacing: .03em; text-decoration: none; white-space: nowrap;
 }
 .navItem:hover { background: rgba(255,255,255,.05); color: rgba(255,255,255,.8); }
 .active { background: rgba(201,169,110,.12) !important; color: var(--gold) !important; }
 
-.siteBtn   { padding: 6px 14px; border: 1px solid var(--border); border-radius: var(--r); background: none; font-size: 12px; color: var(--muted); transition: all .15s; }
+.siteBtn   { padding: 5px 10px; border: 1px solid var(--border); border-radius: var(--r); background: none; font-size: 11px; color: var(--muted); transition: all .15s; white-space: nowrap; display: none; }
 .siteBtn:hover { border-color: var(--gold); color: var(--gold); }
-.logoutBtn { padding: 6px 14px; border: 1px solid var(--border); border-radius: var(--r); background: none; font-size: 12px; color: var(--muted); transition: all .15s; }
+.logoutBtn { padding: 5px 10px; border: 1px solid var(--border); border-radius: var(--r); background: none; font-size: 11px; color: var(--muted); transition: all .15s; white-space: nowrap; }
 .logoutBtn:hover { border-color: #E87070; color: #E87070; }
 
-.userInfo { display: flex; align-items: center; gap: 10px; }
-.avatar   { width: 32px; height: 32px; border-radius: 50%; background: rgba(201,169,110,.2); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--gold); }
-.userName { font-size: 13px; color: rgba(255,255,255,.7); }
-.userRole { font-size: 11px; color: var(--muted); letter-spacing: .06em; text-transform: capitalize; }
+.userInfo { display: flex; align-items: center; gap: 8px; }
+.avatar   { width: 30px; height: 30px; border-radius: 50%; background: rgba(201,169,110,.2); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: var(--gold); flex-shrink: 0; }
+.userName { font-size: 12px; color: rgba(255,255,255,.7); display: none; }
+.userRole { font-size: 10px; color: var(--muted); letter-spacing: .06em; text-transform: capitalize; display: none; }
 
-.main { flex: 1; padding: 36px 40px; max-width: 1400px; width: 100%; margin: 0 auto; }
+.main { flex: 1; padding: 20px 16px; max-width: 1400px; width: 100%; margin: 0 auto; }
+
+@media (min-width: 640px) {
+  .topbar { padding: 0 24px; height: 60px; gap: 16px; }
+  .left { gap: 16px; }
+  .right { gap: 12px; }
+  .logo { font-size: 18px; }
+  .sep { display: block; }
+  .siteBtn { display: block; }
+  .navItem { padding: 7px 14px; font-size: 13px; }
+  .userName { display: block; }
+  .main { padding: 32px 32px; }
+}
+
+@media (min-width: 1024px) {
+  .topbar { padding: 0 40px; }
+  .right { gap: 14px; }
+  .userRole { display: block; }
+  .main { padding: 36px 40px; }
+}
